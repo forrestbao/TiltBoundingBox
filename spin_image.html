@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html style="-webkit-overflow-scrolling: touch;">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rotate HTML elements by mouse in JavaScript - Propeller.js</title>
+    <meta name="viewport" content="width=device-width, target-densitydpi=device-dpi">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/turbine.css">
+</head>
+<body>
+
+<!-- <img src="../example/img/turbineforthumbs.jpg" width="0px" height="0px"> -->
+<!-- <img id="turbine" src="../example/img/turbine.png"> -->
+<img id="turbine" src="image/n02992529_108.JPEG">
+
+
+<div class="arrow">
+    <img src="../example/img/arrow.png">
+
+    <p>
+        Drag to rotate image
+    </p>
+</div>
+
+<script src="js/propeller.js"></script>
+<script>
+    var degree = 0;
+    new Propeller(document.getElementById('turbine'), {
+        inertia: 0.5,
+        angle: 0,
+
+        onRotate: function () {
+            console.log('onRotate');
+            console.log(this.angle);
+            degree = this.angle;
+        }
+    });
+</script>
+<a href="bounding-box.html">confirm</a>
+</body>
+</html>

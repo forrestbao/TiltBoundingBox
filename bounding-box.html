@@ -1,0 +1,57 @@
+
+<html>
+<head>         
+  <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.imgareaselect.js">    </script>      
+
+    </head>
+    <body>
+
+   <img id="turbine" src="image/n02992529_108.JPEG" style="width:40%;height:auto;">
+
+  <script>
+
+  function rotateAnimation(el,degrees){
+          
+      var elem = document.getElementById(el);
+         
+    if(navigator.userAgent.match("Chrome")){
+      elem.style.WebkitTransform = "rotate("+degrees+"deg)";
+    } else if(navigator.userAgent.match("Firefox")){
+      elem.style.MozTransform = "rotate("+degrees+"deg)";
+    } else if(navigator.userAgent.match("MSIE")){
+      elem.style.msTransform = "rotate("+degrees+"deg)";
+    } else if(navigator.userAgent.match("Opera")){
+      elem.style.OTransform = "rotate("+degrees+"deg)";
+    } else {
+      elem.style.transform = "rotate("+degrees+"deg)";
+    }
+    /*document.getElementById("status").innerHTML = "rotate("+degrees+"deg)";
+    degrees = degrees+speed;
+    if(degrees>359){
+        degrees = degrees-360;
+    }*/
+    /*looper = setTimeout('rotateAnimation(\''+el+'\','+speed+')',speed);
+    degrees++;
+    if(degrees > 359){
+      degrees = 1;
+    }
+    document.getElementById("status").innerHTML = "rotate("+degrees+"deg)";*/
+  }
+  </script>
+
+  <script type="text/javascript">
+  $(document).ready(function () {
+
+  $('#turbine').imgAreaSelect({
+  	handles: true,
+    onSelectEnd: function (img, selection) {
+        console.log('left-upper coordinates is: ' + '( ' + selection.x1 + ',' + selection.y1 + ' ); ' + 'width: ' + selection.width + '; height: ' + selection.height);
+    }
+  });
+  });    
+  
+  </script>
+</body>
+</html>

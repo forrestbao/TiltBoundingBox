@@ -1,0 +1,64 @@
+/*
+ * imgAreaSelect default style
+ */
+
+.imgareaselect-border1 {
+	background: url(border-v.gif) repeat-y left top;
+}
+
+.imgareaselect-border2 {
+    background: url(border-h.gif) repeat-x left top;
+}
+
+.imgareaselect-border3 {
+    background: url(border-v.gif) repeat-y right top;
+}
+
+.imgareaselect-border4 {
+    background: url(border-h.gif) repeat-x left bottom;
+}
+
+.imgareaselect-border1, .imgareaselect-border2,
+.imgareaselect-border3, .imgareaselect-border4 {
+    filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.imgareaselect-handle {
+    background-color: #fff;
+    border: solid 1px #000;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.imgareaselect-outer {
+    width: 30%;
+    height: auto;
+    margin-left: 0;
+    vertical-align: middle;
+    position: absolute;
+    top:20%;
+    background-color: #000;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.imgareaselect-selection {  
+}
+
+#turbine {
+    width: 30%;
+    height: auto;
+    margin-left: 20%;
+    vertical-align: middle;
+    position: absolute;
+    top:20%;
+}
+
+body, html {
+    background-color: #1b5fc4;
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica Neue", "Helvetica", "Arial";
+    color: #ffffff;
+}
