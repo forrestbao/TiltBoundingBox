@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Raphaël · Image Rotation</title>
+        <link rel="stylesheet" href="css/demo.css" media="screen">
+        <link rel="stylesheet" href="css/demo-print.css"media="print">
+        <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>    
+        <script src="js/raphael.js"></script>
+        <script>
+            
+            window.onload = function () {
+                var src = document.getElementById("bee").src,
+                    angle = 0;
+                document.getElementById("holder").innerHTML = "";
+                var R = Raphael("holder", 640, 480);
+                R.circle(320, 240, 200).attr({fill: "#000", "fill-opacity": .5, "stroke-width": 5});
+                var img = R.image(src, 160, 120, 320, 240);
+                var butt1 = R.set(),
+                    butt2 = R.set();
+                butt1.push(R.circle(24.833, 26.917, 26.667).attr({stroke: "#ccc", fill: "#fff", "fill-opacity": .4, "stroke-width": 2}),
+                           R.path("M12.582,9.551C3.251,16.237,0.921,29.021,7.08,38.564l-2.36,1.689l4.893,2.262l4.893,2.262l-0.568-5.36l-0.567-5.359l-2.365,1.694c-4.657-7.375-2.83-17.185,4.352-22.33c7.451-5.338,17.817-3.625,23.156,3.824c5.337,7.449,3.625,17.813-3.821,23.152l2.857,3.988c9.617-6.893,11.827-20.277,4.935-29.896C35.591,4.87,22.204,2.658,12.582,9.551z").attr({stroke: "none", fill: "#000"}),
+                           R.circle(24.833, 26.917, 26.667).attr({fill: "#fff", opacity: 0}));
+                butt2.push(R.circle(24.833, 26.917, 26.667).attr({stroke: "#ccc", fill: "#fff", "fill-opacity": .4, "stroke-width": 2}),
+                           R.path("M37.566,9.551c9.331,6.686,11.661,19.471,5.502,29.014l2.36,1.689l-4.893,2.262l-4.893,2.262l0.568-5.36l0.567-5.359l2.365,1.694c4.657-7.375,2.83-17.185-4.352-22.33c-7.451-5.338-17.817-3.625-23.156,3.824C6.3,24.695,8.012,35.06,15.458,40.398l-2.857,3.988C2.983,37.494,0.773,24.109,7.666,14.49C14.558,4.87,27.944,2.658,37.566,9.551z").attr({stroke: "none", fill: "#000"}),
+                           R.circle(24.833, 26.917, 26.667).attr({fill: "#fff", opacity: 0}));
+                butt1.translate(10, 181);
+                butt2.translate(10, 245);
+                butt1[2].click(function () {
+                    angle -= 10;
+                    img.stop().animate({transform: "r" + angle}, 1000, "<>");
+                    //console.log(angle);
+                    $('#angle').val(angle);
+                    
+                }).mouseover(function () {
+                    butt1[1].animate({fill: "#fc0"}, 300);
+                }).mouseout(function () {
+                    butt1[1].stop().attr({fill: "#000"});
+                });
+                butt2[2].click(function () {
+                    angle += 10;
+                    img.animate({transform: "r" + angle}, 1000, "<>");
+                    //console.log(angle);
+                    $('#angle').val(angle);
+                    
+                }).mouseover(function () {
+                    butt2[1].animate({fill: "#fc0"}, 300);
+                }).mouseout(function () {
+                    butt2[1].stop().attr({fill: "#000"});
+                });
+                // setTimeout(function () {R.safari();});
+                //$('#angle').val(angle);
+            };
+        </script>
+    </head>
+    <body>
+        <div id="holder">
+            <img id="bee" src="image/n02992529_108.JPEG" width="320" height="240" alt="Bee">
+        </div>
+        <script type="text/javascript">
+        var x1,y1,w,h;
+        //var deg,xa,ya c_d,o_d, t_v; 
+        $(document).ready(function () {
+            
+            $('#holder').imgAreaSelect({
+            handles: true,
+            onSelectEnd: function (img, selection) {
+                //
+                var deg = ($('#angle').val()/180)*Math.PI;
+                var xa = selection.x1;
+                var ya = selection.y1;
+                var c_d = Math.atan2(240-ya,320-xa);
+                var o_d = c_d - deg;
+                var t_v = Math.sqrt(Math.pow(xa-320,2) + Math.pow(ya-240,2));
+                console.log(o_d);
+                console.log(t_v);
+                console.log(xa);
+                console.log(ya);
+                console.log(c_d);
+                console.log(deg);
+
+                $('#x1').val(Math.round(160 - t_v*Math.cos(o_d)));
+                $('#y1').val(Math.round(120 - t_v*Math.sin(o_d)));
+                //$('#x1').val(selection.x1);
+                //$('#y1').val(selection.y1);
+                $('#w').val(selection.width);
+                $('#h').val(selection.height);
+                //console.log('left-upper coordinates is: ' + '( ' + x1 + ',' + y1 + ' ); ' + 'width: ' + w + '; height: ' + h); 
+                }   
+            });
+        });            
+        </script>
+        <div id="text-format">
+        <label>X1 <input type="text" size="4" id="x1" name="x1" /></label>
+        <label>Y1 <input type="text" size="4" id="y1" name="y1" /></label>
+        <label>W <input type="text" size="4" id="w" name="w" /></label>
+        <label>H <input type="text" size="4" id="h" name="h" /></label>  
+        <label>Deg <input type="text" size="4" id="angle" name="Deg" /></label>
+        
+        </div>
+        
+    </body>
+</html>
