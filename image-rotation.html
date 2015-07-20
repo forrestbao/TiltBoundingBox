@@ -3,17 +3,21 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Raphaël · Image Rotation</title>
+
+        <!--css and js file for image rotation-->
         <link rel="stylesheet" href="css/demo.css" media="screen">
         <link rel="stylesheet" href="css/demo-print.css"media="print">
+        <script src="js/raphael.js"></script>
+
+        <!--css and js file for bounding box-->
         <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>    
-        <script src="js/raphael.js"></script>
+        
+        <!--applying the image rotation function-->
         <script>
-            
             window.onload = function () {
-                var src = document.getElementById("bee").src,
+                var src = document.getElementById("target").src,
                     angle = 0;
                 document.getElementById("holder").innerHTML = "";
                 var R = Raphael("holder", 640, 480);
@@ -55,10 +59,12 @@
                 //$('#angle').val(angle);
             };
         </script>
+
     </head>
     <body>
+        <!--upload the image-->
         <div id="holder">
-            <img id="bee" src="image/n02992529_108.JPEG" width="320" height="240" alt="Bee">
+            <img id="target" src="image/n02992529_108.JPEG" width="320" height="240" alt="Target">
         </div>
         <script type="text/javascript">
         var x1,y1,w,h;
@@ -68,20 +74,23 @@
             $('#holder').imgAreaSelect({
             handles: true,
             onSelectEnd: function (img, selection) {
-                //
+                
+                //for calculate the x,y coordinate referring to the upper-left corner of the image
                 var deg = ($('#angle').val()/180)*Math.PI;
                 var xa = selection.x1;
                 var ya = selection.y1;
                 var c_d = Math.atan2(240-ya,320-xa);
                 var o_d = c_d - deg;
                 var t_v = Math.sqrt(Math.pow(xa-320,2) + Math.pow(ya-240,2));
+                
+                //for test
                 console.log(o_d);
                 console.log(t_v);
                 console.log(xa);
                 console.log(ya);
                 console.log(c_d);
                 console.log(deg);
-
+                 
                 $('#x1').val(Math.round(160 - t_v*Math.cos(o_d)));
                 $('#y1').val(Math.round(120 - t_v*Math.sin(o_d)));
                 //$('#x1').val(selection.x1);
@@ -93,12 +102,14 @@
             });
         });            
         </script>
+
+        <!-- Display the related data -->
         <div id="text-format">
-        <label>X1 <input type="text" size="4" id="x1" name="x1" /></label>
-        <label>Y1 <input type="text" size="4" id="y1" name="y1" /></label>
-        <label>W <input type="text" size="4" id="w" name="w" /></label>
-        <label>H <input type="text" size="4" id="h" name="h" /></label>  
-        <label>Deg <input type="text" size="4" id="angle" name="Deg" /></label>
+        <label>X1 <input type="text" size="4" id="x1" name="x1" /></label> <!-- x coordinate of the upper-left corner of the image -->
+        <label>Y1 <input type="text" size="4" id="y1" name="y1" /></label> <!-- y coordinate of the upper-left corner of the image -->
+        <label>W <input type="text" size="4" id="w" name="w" /></label>  <!-- width of the bounding box -->
+        <label>H <input type="text" size="4" id="h" name="h" /></label>  <!-- height of the bounding box -->
+        <label>Deg <input type="text" size="4" id="angle" name="Deg" /></label> <!--rotation angle-->
         
         </div>
         
