@@ -22,6 +22,7 @@
                 document.getElementById("holder").innerHTML = "";
                 var R = Raphael("holder", 640, 480);
                 R.circle(320, 240, 200).attr({fill: "#000", "fill-opacity": .5, "stroke-width": 5});
+                //var txt = R.text(100, 100, "print", r.getFont("Museo"), 30);
                 var img = R.image(src, 160, 120, 320, 240);
                 document.onkeydown = function(e) {
                     switch (e.keyCode) {
@@ -31,7 +32,7 @@
                             $('#angle').val(angle);
                             break;
                         case 38:
-                            angle -= 5;
+                            angle += 5;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
                             $('#angle').val(angle);
                             break;
@@ -41,7 +42,7 @@
                             $('#angle').val(angle);
                             break;
                         case 40:
-                            angle += 5;
+                            angle -= 5;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
                             $('#angle').val(angle);
                             break;
@@ -104,6 +105,10 @@
         <label>Deg <input type="text" size="4" id="angle" name="Deg" /></label> <!--rotation angle-->
         
         </div>
+
+        <div id = "text-indicator-1"> Use Array Keys on the keyboard to rotate the image</div>
+
+        <div id = "text-indicator-2">Left Rotation (down or left), Right Rotation (up or right)</div>
         
     </body>
 </html>

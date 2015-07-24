@@ -23,5 +23,13 @@ body {
 }
 
 #text-format{
- 
+    margin-left: 40%; 
+}
+
+#text-indicator-1{
+    margin-left:45%;
+    margin-top:10%;
+}
+#text-indicator-2{
+    margin-left:45%;
 }
