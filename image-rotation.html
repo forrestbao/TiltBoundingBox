@@ -29,22 +29,22 @@
                         case 37:
                             angle -= 5;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle);
+                            $('#angle').val(angle%360);
                             break;
                         case 38:
                             angle += 5;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle);
+                            $('#angle').val(angle%360);
                             break;
                         case 39:
                             angle += 5;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle);
+                            $('#angle').val(angle%360);
                             break;
                         case 40:
                             angle -= 5;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle);
+                            $('#angle').val(angle%360);
                             break;
                     }
                 };
