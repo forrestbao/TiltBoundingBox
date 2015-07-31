@@ -28,23 +28,27 @@
                     switch (e.keyCode) {
                         case 37:
                             angle -= 5;
+                            angle = angle%360;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle%360);
+                            $('#angle').val(angle);
                             break;
                         case 38:
                             angle += 5;
+                            angle = angle%360;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle%360);
+                            $('#angle').val(angle);
                             break;
                         case 39:
                             angle += 5;
+                            angle = angle%360;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle%360);
+                            $('#angle').val(angle);
                             break;
                         case 40:
                             angle -= 5;
+                            angle = angle%360;
                             img.stop().animate({transform: "r" + angle}, 1000, "<>");
-                            $('#angle').val(angle%360);
+                            $('#angle').val(angle);
                             break;
                     }
                 };
