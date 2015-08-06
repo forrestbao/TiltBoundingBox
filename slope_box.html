@@ -1,0 +1,123 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script>
+var x1, y1;
+function showCoords(evt){
+  x1 = evt.clientX;
+  y1 = evt.clientY;
+  $('#x1').val(x1);
+  $('#y1').val(y1);
+
+
+}
+</script>
+
+
+<button onclick="First()">First</button>
+<button onclick="Second()">Second</button>
+<button onclick="Third()">Third</button>
+<button onclick="Fourth()">Fourth</button>
+
+<script>
+function First() {
+    $('#x_1').val(x1-286);
+    $('#y_1').val(y1-11);
+}
+function Second() {
+    $('#x_2').val(x1-286);
+    $('#y_2').val(y1-11);
+}
+function Third() {
+    $('#x_3').val(x1-286);
+    $('#y_3').val(y1-11);
+}
+function Fourth() {
+    $('#x_4').val(x1-286);
+    $('#y_4').val(y1-11);
+}
+</script>
+
+</head>
+
+<body>
+<img onmousedown="showCoords(event)" id="target" src="image/n02992529_108.JPEG" width="320" height="240" alt="Target">
+
+<canvas id="myCanvas" src="image/n02992529_108.JPEG" width="320" height="240" style="border:1px solid #c3c3c3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+
+<script>
+
+window.onload = function() {
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("target");
+    ctx.drawImage(img, 0, 0,320, 240);
+    var x_t_1, y_t_1, x_t_2, y_t_2,x_t_3, y_t_3,x_t_4, y_t_4;
+    x_t_1 = $('#x_1').val(); 
+    y_t_1 = $('#y_1').val(); 
+    x_t_2 = $('#x_2').val(); 
+    y_t_2 = $('#y_2').val(); 
+    x_t_3 = $('#x_3').val(); 
+     
+    
+    var slope_1 = (y_t_2 - y_t_1) / (x_t_2 - x_t_1);
+    var slope_2 = -1/slope_1;
+    var constant = y_t_2-0 + (x_t_2-0 / (slope_1-0));
+    y_t_3 = Math.round(slope_2*x_t_3 + constant);
+    x_t_4 = x_t_3 - (x_t_2 - x_t_1); 
+    y_t_4 = y_t_3 - (y_t_2 - y_t_1);
+    
+    console.log(slope_1);
+    console.log(slope_2);
+    console.log(constant);
+    console.log(y_t_2);
+    console.log(x_t_2);
+    console.log(x_t_2/slope_1);
+    console.log(y_t_3);
+    console.log(x_t_4);
+    console.log(y_t_4);
+    $('#x_t_4').val(x_t_4);
+    $('#y_t_4').val(y_t_4);
+ 
+    ctx.moveTo(x_t_1,y_t_1);
+    ctx.lineTo(x_t_2,y_t_2);
+    ctx.moveTo(x_t_2,y_t_2);
+    ctx.lineTo(x_t_3,y_t_3);
+    ctx.moveTo(x_t_3,y_t_3);
+    ctx.lineTo(x_t_4,y_t_4);
+    ctx.moveTo(x_t_4,y_t_4);
+    ctx.lineTo(x_t_1,y_t_1);
+    ctx.stroke();
+}
+
+/*function mFunction(){
+    var c=document.getElementById("myCanvas");
+    var ctx=c.getContext("2d");
+    ctx.fillRect(x1,10,10,10);
+    alert($('#x').val());
+}
+*/
+
+</script>
+
+
+<div id="text-format">
+<label>X1 <input type="text" size="4" id="x_1" name="x_1" /></label> <!-- x coordinate of the upper-left corner of the image -->
+<label>Y1 <input type="text" size="4" id="y_1" name="y_1" /></label> <!-- y coordinate of the upper-left corner of the image -->
+<label>X2 <input type="text" size="4" id="x_2" name="x_2" /></label> <!-- x coordinate of the upper-left corner of the image -->
+<label>Y2 <input type="text" size="4" id="y_2" name="y_2" /></label> <!-- y coordinate of the upper-left corner of the image -->
+<label>X3 <input type="text" size="4" id="x_3" name="x_3" /></label> <!-- x coordinate of the upper-left corner of the image -->
+<label>Y3 <input type="text" size="4" id="y_3" name="y_3" /></label> <!-- y coordinate of the upper-left corner of the image -->
+<label>X4 <input type="text" size="4" id="x_t_4" name="x_4" /></label> <!-- x coordinate of the upper-left corner of the image -->
+<label>Y4 <input type="text" size="4" id="y_t_4" name="y_4" /></label> <!-- y coordinate of the upper-left corner of the image -->
+</div>
+
+</body>
+
+
+</html>
