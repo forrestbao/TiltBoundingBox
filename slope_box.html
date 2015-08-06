@@ -58,17 +58,17 @@ window.onload = function() {
     var img = document.getElementById("target");
     ctx.drawImage(img, 0, 0,320, 240);
     var x_t_1, y_t_1, x_t_2, y_t_2,x_t_3, y_t_3,x_t_4, y_t_4;
-    x_t_1 = $('#x_1').val(); 
-    y_t_1 = $('#y_1').val(); 
-    x_t_2 = $('#x_2').val(); 
-    y_t_2 = $('#y_2').val(); 
-    x_t_3 = $('#x_3').val(); 
+    x_t_1 = parseFloat($('#x_1').val()); 
+    y_t_1 = parseFloat($('#y_1').val()); 
+    x_t_2 = parseFloat($('#x_2').val()); 
+    y_t_2 = parseFloat($('#y_2').val()); 
+    x_t_3 = parseFloat($('#x_3').val()); 
      
     
     var slope_1 = (y_t_2 - y_t_1) / (x_t_2 - x_t_1);
     var slope_2 = -1/slope_1;
-    var constant = y_t_2-0 + (x_t_2-0 / (slope_1-0));
-    y_t_3 = Math.round(slope_2*x_t_3 + constant);
+    var constant = y_t_2 + (x_t_2 / (slope_1));
+    y_t_3 = Math.round(slope_2*(x_t_3) + constant);
     x_t_4 = x_t_3 - (x_t_2 - x_t_1); 
     y_t_4 = y_t_3 - (y_t_2 - y_t_1);
     
