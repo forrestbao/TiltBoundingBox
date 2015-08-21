@@ -15,18 +15,22 @@
         <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>    
-        
-        <!--applying the image rotation function-->
+        <?php
+           $degree = $_POST["Deg"];
+           $imageName = $_POST["ImageName"];
+        ?>
         <script>
             window.onload = function () {
                 var src = document.getElementById("target").src,
-                    angle = 0;
+                    angle = '<?php echo $degree; ?>';
+                    $('#angle').val(angle);
                 document.getElementById("holder").innerHTML = "";
                 var R = Raphael("holder", 640, 480);
                 R.circle(320, 240, 200).attr({fill: "#000", "fill-opacity": .5, "stroke-width": 5});
                 //var txt = R.text(100, 100, "print", r.getFont("Museo"), 30);
                 var img = R.image(src, 160, 120, 320, 240);
-                document.onkeydown = function(e) {
+                img.stop().animate({transform: "r" + angle}, 1000, "<>");
+/*                document.onkeydown = function(e) {
                     switch (e.keyCode) {
                         case 37:
                             angle -= 5;
@@ -53,7 +57,7 @@
                             $('#angle').val(angle);
                             break;
                     }
-                };
+                };*/
                 // setTimeout(function () {R.safari();});
                 //$('#angle').val(angle);
             };
@@ -63,63 +67,16 @@
     <body>
 
 
-        <!--upload the image-->
-        <?php
-        $file_name = array();
-        $file_handle = fopen("filename.txt", "rb");
-
-        while (!feof($file_handle) ) {
-
-        $line_of_text = fgets($file_handle);
-        $parts = explode('=', $line_of_text);
-
-        //print $parts[0] .  "<BR>";
-        array_push($file_name, $parts[0]);
-
-        }
-
-        $arrlength = count($file_name);
-/*        for($x = 0; $x < $arrlength; $x++) {
-        //    echo $file_name[$x];
-            //echo "image/" . $file_name[$x];
-            //echo "<br>";
-
-            //echo "<img src = 'image/" . $file_name[$x] . "'>";
-            break;
-        }*/
-
-        fclose($file_handle);
-
-        ?>
-
 <!--         <div id="holder">
             <img id="target" src="image/n02992529_108.JPEG" width="320" height="240" alt="Target">
         </div> -->
 
         <div id="holder">
             <?php
-            $temp = $file_name[array_rand($file_name)];
-            echo "<img id='target' src='images/" . $temp . "' width='320' height='240' alt='Target'>";
+            
+            echo "<img id='target' src='images/" . $imageName . "' width='320' height='240' alt='Target'>";
             ?> 
         </div>
-
-        <script>
-            var degree = 0;
-            new Propeller(document.getElementById('holder'), {
-                inertia: 0.5,
-                angle: 0,
-
-                onRotate: function () {
-                    console.log('onRotate');
-                    //console.log(this.angle);
-                    degree = this.angle;
-                    $('#degree').val(degree);
-                    //console.log(degree);
-                }
-                //console.log(degree);
-            });
-            //console.log(degree);
-        </script>
 
         <script type="text/javascript">
         var x1,y1,w,h;
@@ -160,17 +117,17 @@
 
         <!-- Display the related data -->
         <div id="text-format">
-        <form action = "image-boundingbox.php" method = "post">
+        <form action = "insert.php" method = "post">
         <label>X1 <input type="text" size="4" id="x1" name="x1" /></label> <!-- x coordinate of the upper-left corner of the image -->
         <label>Y1 <input type="text" size="4" id="y1" name="y1" /></label> <!-- y coordinate of the upper-left corner of the image -->
         <br />
         <label>W <input type="text" size="4" id="w" name="w" /></label>  <!-- width of the bounding box -->
         <label>H <input type="text" size="4" id="h" name="h" /></label>  <!-- height of the bounding box -->
-        <label>Deg <input type="text" size="4" id="degree" name="Deg" /></label> <!--rotation angle-->
+        <label>Deg <input type="text" size="4" id="angle" name="Deg" /></label> <!--rotation angle-->
         <br />
         <label>
         <?php
-        echo "ImageName <input type = 'text' name = 'ImageName' value =" . $temp . "/>";
+        echo "ImageName <input type = 'text' name = 'ImageName' value =" . $imageName . "/>";
         ?>
         <label>
         <br />
