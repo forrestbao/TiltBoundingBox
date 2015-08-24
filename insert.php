@@ -13,16 +13,19 @@
     $angle = $_POST["Deg"];
     $imName = $_POST["ImageName"];
     $obName = $_POST["ObjectName"];
+    $information = "Please fill blank space!";
     
-    $sql = "INSERT INTO Objects (ID, object, image, left_upper_x, left_upper_y, height, width, angle)
-            VALUES (NULL, '$obName', '$imName','$l_u_x','$l_u_y','$height','$width','$angle')";
-    
-	mysql_query($sql);
-
-
-	echo "User has been added";
-
-    header("Location: image-rotation.php");
+    if($obName == "" || $l_u_x == ""){
+        header("Location: image-boundingbox.php?ImageName=" . $imName ."&Deg=".$angle. "&infor=".$information);
+    }else{
+        $sql = "INSERT INTO Objects (ID, object, image, left_upper_x, left_upper_y, height, width, angle)
+                VALUES (NULL, '$obName', '$imName','$l_u_x','$l_u_y','$height','$width','$angle')";
+        
+    	mysql_query($sql);
+     
+    	echo "User has been added";
+        header("Location: image-rotation.php?name=" . $imName);
+    }
 
 ?>
 </head>

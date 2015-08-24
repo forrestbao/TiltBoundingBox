@@ -16,8 +16,22 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>    
         <?php
-           $degree = $_POST["Deg"];
-           $imageName = $_POST["ImageName"];
+           $temp_degree = $_GET["Deg"];
+           $temp_imgN = $_GET["ImageName"];
+           if($temp_degree != null){
+               $degree = $temp_degree;
+           }else{
+               $degree = $_POST["Deg"]; 
+           }
+           if($temp_imgN != null){
+               $imageName = $temp_imgN;
+           }else{
+               $imageName = $_GET["name"]; 
+           }
+           $information = $_GET["infor"];
+           $imageName = basename($imageName, "//");
+
+           $object_name = $_POST["ObjectName"];
         ?>
         <script>
             window.onload = function () {
@@ -129,17 +143,24 @@
         <?php
         echo "ImageName <input type = 'text' name = 'ImageName' value =" . $imageName . "/>";
         ?>
-        <label>
+        </label>
         <br />
-        <label>ObjectName <input type = "text" name = "ObjectName" value = "" /></label>
+        <?php
+        echo "
+        <label>ObjectName <input type = 'text' name = 'ObjectName' value = '".$object_name."'/></label>
+        "
+        ?>
         <br />
         <label><input type = "submit" name = "submit"></label>
         </form>
+        <?php
+        echo "
+        <h3>" . $information. "</h3>"
+        ?> 
         </div>
+<!--         <div id = "text-indicator-1"> Use Array Keys on the keyboard to rotate the image</div>
 
-        <div id = "text-indicator-1"> Use Array Keys on the keyboard to rotate the image</div>
-
-        <div id = "text-indicator-2">Left Rotation (down or left), Right Rotation (up or right)</div>
+        <div id = "text-indicator-2">Left Rotation (down or left), Right Rotation (up or right)</div> -->
         
     </body>
 </html>

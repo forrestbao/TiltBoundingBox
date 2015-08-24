@@ -89,16 +89,26 @@
         }*/
 
         fclose($file_handle);
-
+        $temp = $file_name[array_rand($file_name)];
+        //$temp = basename($temp);
+        
+        //$temp = $file_name[1];
+        $temp_image_name = $_GET["name"];
+        if($temp_image_name != null){
+            $temp = $temp_image_name;
+        }
+        $temp = basename($temp,"\n"); 
         ?>
 
 <!--         <div id="holder">
             <img id="target" src="image/n02992529_108.JPEG" width="320" height="240" alt="Target">
         </div> -->
+        
+
 
         <div id="holder">
             <?php
-            $temp = $file_name[array_rand($file_name)];
+            
             echo "<img id='target' src='images/" . $temp . "' width='320' height='240' alt='Target'>";
             ?> 
         </div>
@@ -119,48 +129,59 @@
                 //console.log(degree);
             });
             //console.log(degree);
-        </script>
+        // </script>
 
-        <script type="text/javascript">
-        var x1,y1,w,h;
-        //var deg,xa,ya c_d,o_d, t_v; 
-        $(document).ready(function () {
+         <script type="text/javascript">
+        // var x1,y1,w,h;
+        // //var deg,xa,ya c_d,o_d, t_v; 
+        // $(document).ready(function () {
             
-            $('#holder').imgAreaSelect({
-            handles: true,
-            onSelectEnd: function (img, selection) {
+        //     $('#holder').imgAreaSelect({
+        //     handles: true,
+        //     onSelectEnd: function (img, selection) {
                 
-                //for calculate the x,y coordinate referring to the upper-left corner of the image
-                var deg = ($('#angle').val()/180)*Math.PI;
-                var xa = selection.x1;
-                var ya = selection.y1;
-                var c_d = Math.atan2(240-ya,320-xa);
-                var o_d = c_d - deg;
-                var t_v = Math.sqrt(Math.pow(xa-320,2) + Math.pow(ya-240,2));
+        //         //for calculate the x,y coordinate referring to the upper-left corner of the image
+        //         var deg = ($('#angle').val()/180)*Math.PI;
+        //         var xa = selection.x1;
+        //         var ya = selection.y1;
+        //         var c_d = Math.atan2(240-ya,320-xa);
+        //         var o_d = c_d - deg;
+        //         var t_v = Math.sqrt(Math.pow(xa-320,2) + Math.pow(ya-240,2));
                 
-                //for test
-                console.log(o_d);
-                console.log(t_v);
-                console.log(xa);
-                console.log(ya);
-                console.log(c_d);
-                console.log(deg);
+        //         //for test
+        //         console.log(o_d);
+        //         console.log(t_v);
+        //         console.log(xa);
+        //         console.log(ya);
+        //         console.log(c_d);
+        //         console.log(deg);
                  
-                $('#x1').val(Math.round(160 - t_v*Math.cos(o_d)));
-                $('#y1').val(Math.round(120 - t_v*Math.sin(o_d)));
-                //$('#x1').val(selection.x1);
-                //$('#y1').val(selection.y1);
-                $('#w').val(selection.width);
-                $('#h').val(selection.height);
-                //console.log('left-upper coordinates is: ' + '( ' + x1 + ',' + y1 + ' ); ' + 'width: ' + w + '; height: ' + h); 
-                }   
-            });
-        });            
-        </script>
+        //         $('#x1').val(Math.round(160 - t_v*Math.cos(o_d)));
+        //         $('#y1').val(Math.round(120 - t_v*Math.sin(o_d)));
+        //         //$('#x1').val(selection.x1);
+        //         //$('#y1').val(selection.y1);
+        //         $('#w').val(selection.width);
+        //         $('#h').val(selection.height);
+        //         //console.log('left-upper coordinates is: ' + '( ' + x1 + ',' + y1 + ' ); ' + 'width: ' + w + '; height: ' + h); 
+        //         }   
+        //     });
+        // });            
+        // </script>
 
         <!-- Display the related data -->
+        <button id="change_image" class="float-left submit-button" >Change Image</button> 
         <div id="text-format">
-        <form action = "image-boundingbox.php" method = "post">
+        <?php
+        echo "
+        <form action = 'image-boundingbox.php?name=" . $temp ."' method = 'post'>
+        "
+        ?>
+       <!-- <label>
+        <?php
+        echo "ImageName <input type = 'text' name = 'ImageName' value ='" . $temp . "'/>"
+        ?>
+        </label>
+        <br />-->
         <label>X1 <input type="text" size="4" id="x1" name="x1" /></label> <!-- x coordinate of the upper-left corner of the image -->
         <label>Y1 <input type="text" size="4" id="y1" name="y1" /></label> <!-- y coordinate of the upper-left corner of the image -->
         <br />
@@ -168,21 +189,27 @@
         <label>H <input type="text" size="4" id="h" name="h" /></label>  <!-- height of the bounding box -->
         <label>Deg <input type="text" size="4" id="degree" name="Deg" /></label> <!--rotation angle-->
         <br />
-        <label>
-        <?php
-        echo "ImageName <input type = 'text' name = 'ImageName' value =" . $temp . "/>";
-        ?>
-        <label>
-        <br />
         <label>ObjectName <input type = "text" name = "ObjectName" value = "" /></label>
         <br />
-        <label><input type = "submit" name = "submit"></label>
+        <label><button id="myButton" class="float-left submit-button" >confirm</button><label> 
         </form>
+
         </div>
 
-        <div id = "text-indicator-1"> Use Array Keys on the keyboard to rotate the image</div>
+<!--         <div id = "text-indicator-1"> Use Array Keys on the keyboard to rotate the image</div>
 
-        <div id = "text-indicator-2">Left Rotation (down or left), Right Rotation (up or right)</div>
+        <div id = "text-indicator-2">Left Rotation (down or left), Right Rotation (up or right)</div> -->
+
         
+        <!--<script type="text/javascript">
+            document.getElementById("myButton").onclick = function () {
+                location.href = "image-rotation.php";
+            };
+        </script>-->
+        <script type="text/javascript">
+            document.getElementById("change_image").onclick = function () {
+                location.href = "image-rotation.php";
+            };
+        </script> 
     </body>
 </html>

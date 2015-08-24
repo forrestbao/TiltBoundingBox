@@ -28,8 +28,11 @@ body {
 
 #text-indicator-1{
     margin-left:49%;
-    margin-top:5%;
+    margin-top:auto;
 }
 #text-indicator-2{
     margin-left:49%;
+}
+#change_image{
+    margin-left:50%;
 }
