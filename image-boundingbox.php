@@ -131,7 +131,12 @@
 
         <!-- Display the related data -->
         <div id="text-format">
-        <form action = "insert.php" method = "post">
+        <?php
+        echo "
+        <form action = 'insert.php?name=".$imageName. "' method = 'post'>
+        "
+        ?>
+        <br />
         <label>X1 <input type="text" size="4" id="x1" name="x1" /></label> <!-- x coordinate of the upper-left corner of the image -->
         <label>Y1 <input type="text" size="4" id="y1" name="y1" /></label> <!-- y coordinate of the upper-left corner of the image -->
         <br />
@@ -139,12 +144,12 @@
         <label>H <input type="text" size="4" id="h" name="h" /></label>  <!-- height of the bounding box -->
         <label>Deg <input type="text" size="4" id="angle" name="Deg" /></label> <!--rotation angle-->
         <br />
-        <label>
+        <!--<label>
         <?php
         echo "ImageName <input type = 'text' name = 'ImageName' value =" . $imageName . "/>";
         ?>
         </label>
-        <br />
+        <br />-->
         <?php
         echo "
         <label>ObjectName <input type = 'text' name = 'ObjectName' value = '".$object_name."'/></label>
