@@ -17,11 +17,11 @@ Steps to step up the LAMP (Linux, Apache, MySQL, PHP):
    sudo apt-get install phpmyadmin<br>
   
    or apply sql to build the database<br>
-   create database image_data;   //image_data is the name of the database we use in the php file<br> 
-   use image_data;<br>  
+   //image_data is the name of the database we use in the php file<br> 
    //Objects is the name opf the table we use in the php file<br> 
-   //8 attributes: ID, object, image, upper_left_x, upper_left_y, height, width, angle<br>
-
+   //8 attributes: ID, object, image, upper_left_x, upper_left_y, height, width, angle<br>  
+   create database image_data;<br>   
+   use image_data;<br> 
    create table Objects(ID INI(11) UNSIGNED auto_increment primary key,
                         object varchar(25), 
                         image varchar(100), 
