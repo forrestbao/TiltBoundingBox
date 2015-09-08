@@ -4,12 +4,12 @@ Steps to step up the LAMP (Linux, Apache, MySQL, PHP):
 1. Worked with ubuntu 14.04.
 
 2. Install apache, mysql, php, and related documents:
-  sudo apt-get update
-  sudo apt-get install apache2
-  sudo apt-get install php5 
-  sudo apt-get install mysql-server mysql-client 
-  sudo apt-get install libapache2-mod-php5  
-  sudo apt-get install php5-mysql
+  sudo apt-get update;
+  sudo apt-get install apache2;
+  sudo apt-get install php5;
+  sudo apt-get install mysql-server mysql-client; 
+  sudo apt-get install libapache2-mod-php5;  
+  sudo apt-get install php5-mysql;
 
 3. Enter localhost on the web browser to test if it workd well.
 
