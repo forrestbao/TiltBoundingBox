@@ -27,5 +27,7 @@ Steps to step up the LAMP (Linux, Apache, MySQL, PHP):
 
 5. Put images in a folder named "images" in current directory, and run the file.php. 
    Then, filename.txt should appear in the current directory with all the name of the images inside.
+
 6. In connect.php, Enter the host name after $dbhost and password after $dbpass.
+
 7. Run image-rotation.php
