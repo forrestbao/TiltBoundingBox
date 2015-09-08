@@ -22,8 +22,13 @@ Steps to step up the LAMP (Linux, Apache, MySQL, PHP):
    //Objects is the name opf the table we use in the php file 
    //8 attributes: ID, object, image, upper_left_x, upper_left_y, height, width, angle 
    create table Objects(ID INI(11) UNSIGNED auto_increment primary key, 
-    object varchar(25), image varchar(100), left_upper_x INI(11), 
-    left_upper_y INI(11), height INI(11), width INI(11), angle INI(11));
+                        object varchar(25), 
+                        image varchar(100), 
+                        left_upper_x INI(11), 
+                        left_upper_y INI(11),
+                        height INI(11), 
+                        width INI(11), 
+                        angle INI(11));
 
 5. Put images in a folder named "images" in current directory, and run the file.php. 
    Then, filename.txt should appear in the current directory with all the name of the images inside.
