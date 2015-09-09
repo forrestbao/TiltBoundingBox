@@ -4,9 +4,13 @@
     $dbpass = "1";
     $db = "image_data";
 
-    mysql_connect($dbhost, $dbuser, $dbpass) or die("failed");
+    $link = mysql_connect($dbhost, $dbuser, $dbpass);
+    if(!$link){
+    	header("Location: image-rotation.php?connection=failed");
+    } 
     echo "success";
 
     mysql_select_db($db);
     echo "success";
 ?>
+

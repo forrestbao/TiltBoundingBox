@@ -18,6 +18,8 @@ if (is_dir($dir)) {
         closedir($dh);
     }
 }
+
+echo "success";
 /*$txt = "John Doe\n";
 fwrite($myfile, $txt);
 $txt = "Jane Doe\n";

@@ -18,6 +18,7 @@
         <?php
            $temp_degree = $_GET["Deg"];
            $temp_imgN = $_GET["ImageName"];
+           $connection = $_GET["connection"];
            if($temp_degree != null){
                $degree = $temp_degree;
            }else{
@@ -28,6 +29,8 @@
            }else{
                $imageName = $_GET["name"]; 
            }
+
+           
            $information = $_GET["infor"];
            $imageName = basename($imageName, "//");
 
@@ -160,7 +163,9 @@
         </form>
         <?php
         echo "
-        <h3>" . $information. "</h3>"
+        <h3>" . $information. "</h3>
+        <h3>" . $connection . "</h3>"
+
         ?> 
         </div>
 <!--         <div id = "text-indicator-1"> Use Array Keys on the keyboard to rotate the image</div>
