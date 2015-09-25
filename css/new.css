@@ -1,0 +1,38 @@
+canvas {
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid black;
+    z-index:-1
+    
+}
+
+.coords{
+    margin-left: 1000px;
+    margin-top: 0px;
+    position:absolute;
+    top: 250px;
+}
+
+
+
+.fromX, .fromY, .width, .height {
+    font-weight: bold;
+    color: red;
+}
+#loading{
+    width:400px;
+    height:400px;
+    margin:150px 0 0 150px; 
+   
+    }
+#loading img {
+    background-repeat:no-repeat; 
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    }
+.hide{
+    display:none;
+}
