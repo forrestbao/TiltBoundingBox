@@ -2,7 +2,7 @@ var zoomLevel = 100;
 var maxZoomLevel = 105;
 var minZoomLevel = 100;
 var mouseIsDown = 0;
-var canvas, context, startX, endX, startY, endY, r, width, height, Xcenter, Ycenter, ImageWidth, ImageHeight,realStartX, realStartY, zoomvalue;
+var canvas, context, startX, endX, startY, endY, r, width, height, Xcenter, Ycenter, ImageWidth, ImageHeight,realStartX, realStartY, zoomvalue, xx, yy, a_1, r_a;
 
 function zoomimage(zm) {
     
@@ -26,8 +26,8 @@ function zoomimage(zm) {
     zoomimg.style.height = (ht*zm)+"px";
 
     $(".zoom").html(zoomLevel-100);
-    
 }
+
 $(document).ready(function () {
    
     (function() {  /*the function is to rotate the object*/
@@ -45,7 +45,7 @@ $(document).ready(function () {
         dragging = true;
         offset = Math.atan2(rote.center_y - e.pageY, e.pageX - rote.center_x);
         });/*binding an event handler and call function when that event occurs */
-  
+        
 
         $(document).mouseup(function(e) { 
            dragging = false
@@ -66,6 +66,28 @@ $(document).ready(function () {
             }
               
         }) 
+        
+        
+        // ImageWidth = 400*(1+((100-100)/10));
+        // ImageHeight = ImageWidth;
+        // realStartX = Xcenter - ImageWidth/2;
+        // realStartY = Ycenter - ImageHeight/2;
+        // a_1 = Math.atan2((Ycenter - realStartY),(Xcenter - realStartX));
+        // r_a = (r/180)*Math.PI;
+        // var a_2 = a_1 + r_a;
+        // var l_1 = Math.sqrt(Math.pow(Ycenter - realStartY,2) + Math.pow(Xcenter - realStartX,2));
+        // var xTrue = Xcenter - l_1*Math.cos(a_2);
+        // var yTrue = Ycenter - l_1*Math.sin(a_2);
+        // var l_2 = Math.sqrt(Math.pow(startX - xTrue,2) + Math.pow(startY - yTrue,2));
+        // var a_3 = Math.atan2(startY - yTrue,startX - xTrue);
+        // var a_4 = a_3 - r_a;
+        // xx = Math.floor(l_2*Math.sin(a_4));
+        // yy = Math.floor(l_2*Math.cos(a_4));
+        
+        //startX = xx;
+        //startY = yy;
+          
+
     }());
 
     $("#anglebutton").click(function () {    
@@ -77,7 +99,8 @@ $(document).ready(function () {
 
     mouseIsDown = 0;
  
-    init();         
+    init();   
+
     });
     
     function init() {
@@ -138,7 +161,7 @@ $(document).ready(function () {
     }
 
 
-    zoomvalue = $(".zoom").html();
+    
     function drawSquare() {   /*draw square using coordinates when we mouseup and mousedown */
         // creating a square
         var w = endX - startX;
@@ -160,31 +183,6 @@ $(document).ready(function () {
         context.stroke();
         $(".width").html(width);
         $(".height").html(height);
-
-        
-        if(zoomvalue == ""){
-            zoomvalue = 0;
-        }
-
-        ImageWidth = 400*(1+(parseInt(zoomvalue)/10));
-        ImageHeight = ImageWidth;
-        realStartX = Xcenter - ImageWidth/2;
-        realStartY = Ycenter - ImageHeight/2;
-        // var a_1 = Math.atan2((Ycenter - realStartY),(Xcenter - realStartX));
-
-        // var r_a = (r/180)*Math.PI;
-        // var a_2 = a_1 + r_a;
-        // var l_1 = Math.sqrt(Math.pow(Ycenter - realStartY,2) + Math.pow(Xcenter - realStartX,2));
-        // var xTrue = Xcenter - l_1*Math.cos(a_2);
-        // var yTrue = Ycenter - l_1*Math.sin(a_2);
-        // var l_2 = Math.sqrt(Math.pow(startX - xTrue,2) + Math.pow(startY - yTrue,2));
-        // var a_3 = Math.atan2(startY - yTrue,startX - xTrue);
-        // var a_4 = a_3 - r_a;
-        // var xx = Math.floor(l_2*Math.sin(a_4));
-        // var yy = Math.floor(l_2*Math.cos(a_4));
-        
-        // startX = xx;
-        // startY = yy;
 
     }
 

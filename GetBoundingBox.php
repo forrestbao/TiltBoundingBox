@@ -111,26 +111,29 @@ document.getElementById("confirm").onclick = function () {
     // var xx = Math.floor(l_2*Math.sin(a_4));
     // var yy = Math.floor(l_2*Math.cos(a_4));
     
-    //console.log(xx);
-    //console.log(yy);
-    // console.log(a_1);
-    // console.log(r);
+    //console.log(a_1);
+    //console.log(r_a);
+    //console.log(a_1);
+    //console.log(r);
     // console.log(xTrue);
     // console.log(yTrue);
     // console.log(l_1);
 
     //console.log(Xcenter);
     // console.log(Ycenter);
-    console.log(zoomvalue);
-    console.log(ImageWidth);
-    console.log(ImageHeight);
-    console.log(startX);
-    console.log(startY);
-    console.log(realStartX);
-    console.log(realStartY);
+    //console.log(zoomLevel);
+    //console.log(zoomvalue);
+    //console.log(ImageWidth);
+    //console.log(ImageHeight);
+    //console.log(startX);
+    //console.log(startY);
+    //console.log(realStartX);
+    //console.log(realStartY);
     // console.log(width);
     // console.log(height);
-
+    <?php
+    echo "location.href = 'insert.php?ObjectName=' + obname + '&X=' + startX + '&Y=' + startY + '&width=' + width + '&height=' + height + '&r=' + r + '&name=" . $temp . "';"
+    ?>
 };
 
 document.getElementById("New").onclick = function () {

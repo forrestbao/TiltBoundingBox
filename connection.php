@@ -6,7 +6,7 @@
 
     $link = mysql_connect($dbhost, $dbuser, $dbpass);
     if(!$link){
-    	header("Location: image-rotation.php?connection=failed");
+    	header("Location: GetBoundingBox.php?connection=Connection_failed");
     } 
     echo "success";
 
