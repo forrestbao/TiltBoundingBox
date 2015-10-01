@@ -2,7 +2,7 @@ var zoomLevel = 100;
 var maxZoomLevel = 105;
 var minZoomLevel = 100;
 var mouseIsDown = 0;
-var canvas, context, startX, endX, startY, endY, r, width, height;
+var canvas, context, startX, endX, startY, endY, r, width, height, Xcenter, Ycenter, ImageWidth, ImageHeight,realStartX, realStartY, zoomvalue;
 
 function zoomimage(zm) {
     
@@ -24,46 +24,50 @@ function zoomimage(zm) {
     ht = zoomimg.height;
     zoomimg.style.width = (wid*zm)+"px";
     zoomimg.style.height = (ht*zm)+"px";
+
+    $(".zoom").html(zoomLevel-100);
     
 }
 $(document).ready(function () {
    
     (function() {  /*the function is to rotate the object*/
-       var rote=$("#zoomedimage");
-      
-     rote.center_x = rote.offset().left + rote.width() / 2;
+        var rote=$("#zoomedimage");
+        Xcenter = rote.offset().left + rote.width() / 2;
+        rote.center_x = Xcenter;
                      /*this returns the center of object or image  taken in the x-direction,offset.left gives position from left and later gives midvalue of object*/
-      rote.center_y = rote.offset().top + rote.height() / 2;
+        Ycenter = rote.offset().top + rote.height() / 2             
+        rote.center_y = Ycenter;
               /*this returns the center of object or image  taken in the y-direction,offset.top gives position from top and later gives midvalue of object*/  
-  
-var offset, dragging=false;
-    rote.mousedown(function(e) {
-    e.preventDefault(); /*prevents default function of event from happening*/
-    dragging = true;
-    offset = Math.atan2(rote.center_y - e.pageY, e.pageX - rote.center_x);
-    });/*binding an event handler and call function when that event occurs */
+        
+        var offset, dragging=false;
+        rote.mousedown(function(e) {
+        e.preventDefault(); /*prevents default function of event from happening*/
+        dragging = true;
+        offset = Math.atan2(rote.center_y - e.pageY, e.pageX - rote.center_x);
+        });/*binding an event handler and call function when that event occurs */
   
 
-  $(document).mouseup(function(e) { 
-     dragging = false
-  });
-  $(document).mousemove(function(e) {
-      if (dragging) { 
-        
-        var newOffset = Math.atan2(rote.center_y - e.pageY, e.pageX - rote.center_x);
-        r = (offset - newOffset) * 180 / Math.PI;
-        
-        rote.css('transform', 'rotate(' + r + 'deg)');
-         console.log('Rotate: ' + r + 'deg');
-          if (r < 0) {
-            r = r + 360;
-        }
-         $("#angle").html(r + 'deg'); 
-          
-      }
-      
-    }) 
-}());
+        $(document).mouseup(function(e) { 
+           dragging = false
+        });
+        $(document).mousemove(function(e) {
+            if (dragging) { 
+                
+            var newOffset = Math.atan2(rote.center_y - e.pageY, e.pageX - rote.center_x);
+            r = (offset - newOffset) * 180 / Math.PI;
+            
+            rote.css('transform', 'rotate(' + r + 'deg)');
+            console.log('Rotate: ' + r + 'deg');
+              if (r < 0) {
+                r = r + 360;
+            }
+             $("#angle").html(r + 'deg'); 
+                  
+            }
+              
+        }) 
+    }());
+
     $("#anglebutton").click(function () {    
         $('canvas').css('z-index','+1');
         $('#loading').css('opacity','0.8');     
@@ -93,11 +97,14 @@ var offset, dragging=false;
             var pos = getMousePos(canvas, eve);
             endX = pos.x;
             endY = pos.y;
-           
-            drawSquare();
-           
-            //update on mouse-up
             
+            if(endX>startX && endY>startY){
+                drawSquare();
+            }else{
+                return null;
+            }
+           
+            //update on mouse-up    
         }
     }
 
@@ -106,8 +113,11 @@ var offset, dragging=false;
         var pos = getMousePos(canvas, eve);
         startX = endX = pos.x;
         startY = endY = pos.y;
-            
+        if(endX>startX && endY>startY){
             drawSquare(); 
+        }else{
+            return null;
+        }
         
     }
 
@@ -117,11 +127,18 @@ var offset, dragging=false;
             var pos = getMousePos(canvas, eve);
             endX = pos.x;
             endY = pos.y;
-            drawSquare();
+
+            if(endX>startX && endY>startY){
+                drawSquare();
+            }else{
+                return null;
+            }
             
         }
     }
 
+
+    zoomvalue = $(".zoom").html();
     function drawSquare() {   /*draw square using coordinates when we mouseup and mousedown */
         // creating a square
         var w = endX - startX;
@@ -143,6 +160,32 @@ var offset, dragging=false;
         context.stroke();
         $(".width").html(width);
         $(".height").html(height);
+
+        
+        if(zoomvalue == ""){
+            zoomvalue = 0;
+        }
+
+        ImageWidth = 400*(1+(parseInt(zoomvalue)/10));
+        ImageHeight = ImageWidth;
+        realStartX = Xcenter - ImageWidth/2;
+        realStartY = Ycenter - ImageHeight/2;
+        // var a_1 = Math.atan2((Ycenter - realStartY),(Xcenter - realStartX));
+
+        // var r_a = (r/180)*Math.PI;
+        // var a_2 = a_1 + r_a;
+        // var l_1 = Math.sqrt(Math.pow(Ycenter - realStartY,2) + Math.pow(Xcenter - realStartX,2));
+        // var xTrue = Xcenter - l_1*Math.cos(a_2);
+        // var yTrue = Ycenter - l_1*Math.sin(a_2);
+        // var l_2 = Math.sqrt(Math.pow(startX - xTrue,2) + Math.pow(startY - yTrue,2));
+        // var a_3 = Math.atan2(startY - yTrue,startX - xTrue);
+        // var a_4 = a_3 - r_a;
+        // var xx = Math.floor(l_2*Math.sin(a_4));
+        // var yy = Math.floor(l_2*Math.cos(a_4));
+        
+        // startX = xx;
+        // startY = yy;
+
     }
 
     function getMousePos(canvas, evt) { /*this function provides the position of mouse*/
@@ -156,7 +199,11 @@ var offset, dragging=false;
         };
         
     }
-    
+
+
+
+
+
     $("#reset").click(function(){
     	$('canvas').css('z-index','-1');
         $('#loading').css('opacity','1');     

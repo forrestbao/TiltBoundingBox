@@ -50,7 +50,12 @@ $connection = $_GET["Connection"];
 
 
 <div class="coords">
-
+    <h4>Step 1: Press the "-" or "+" button at the upper left corner to </h4>
+    <h4>zoom in or out the image to make sure that the object has a suitable size.</h4>
+    <h4>Step 2: Use mouse to rotate the image make sure that the object is straight up</h4>
+    <h4>Step 3: Press the "Fetch Object" button, and draw bounding box of</h4>
+    <h4> the object from upper left to the right botton</h4>
+    <h4>Step 4: Enter the name of the object and press the confirm button to send the data to the database</h4>
     <?php
     echo "
     <h3>" . $information. "</h3>
@@ -67,29 +72,70 @@ $connection = $_GET["Connection"];
     <p>W: <span class="width"></span>
     </p>
     <p>H: <span class="height"></span>
+    <p>Zoom: <span class="zoom"></span>
      </p>
 
-</div>
+
 
  <label>ObjectName <input type = "text" name = "ObjectName" id = "ObName" value = "" /></label> 
  <br>
 
-<button id="anglebutton">Fetch Angle</button>
+<button id="anglebutton">Fetch Object</button>
 <button id="reset">Reset</button>
 <button id="confirm" class="float-left submit-button" >confirm</button>
+<br >
+<button id="New" class="float-left submit-button" >New Image</button>
 
+</div>
 <script type="text/javascript">
 document.getElementById("confirm").onclick = function () {
     var obname = document.getElementById("ObName").value
-    // console.log(startX);
-    // console.log(startY);
+    // var zoomvalue = $(".zoom").html();
+    // if(zoomvalue == ""){
+    //     zoomvalue = 0;
+    // }
+    // ImageWidth = 400*(1+(parseInt(zoomvalue)/10));
+    // ImageHeight = ImageWidth;
+    // realStartX = Xcenter - ImageWidth/2;
+    // realStartY = Ycenter - ImageHeight/2;
+    // var a_1 = Math.atan2((Ycenter - realStartY),(Xcenter - realStartX));
+
+    // var r_a = (r/180)*Math.PI;
+    // var a_2 = a_1 + r_a;
+    // var l_1 = Math.sqrt(Math.pow(Ycenter - realStartY,2) + Math.pow(Xcenter - realStartX,2));
+    // var xTrue = Xcenter - l_1*Math.cos(a_2);
+    // var yTrue = Ycenter - l_1*Math.sin(a_2);
+    // var l_2 = Math.sqrt(Math.pow(startX - xTrue,2) + Math.pow(startY - yTrue,2));
+    // var a_3 = Math.atan2(startY - yTrue,startX - xTrue);
+    // var a_4 = a_3 - r_a;
+    // var xx = Math.floor(l_2*Math.sin(a_4));
+    // var yy = Math.floor(l_2*Math.cos(a_4));
+    
+    //console.log(xx);
+    //console.log(yy);
+    // console.log(a_1);
     // console.log(r);
+    // console.log(xTrue);
+    // console.log(yTrue);
+    // console.log(l_1);
+
+    //console.log(Xcenter);
+    // console.log(Ycenter);
+    console.log(zoomvalue);
+    console.log(ImageWidth);
+    console.log(ImageHeight);
+    console.log(startX);
+    console.log(startY);
+    console.log(realStartX);
+    console.log(realStartY);
     // console.log(width);
     // console.log(height);
-    // console.log(obname);
-    <?php
-    echo "location.href = 'insert.php?ObjectName=' + obname + '&X=' + startX + '&Y=' + startY + '&width=' + width + '&height=' + height + '&r=' + r + '&name=" . $temp . "';"
-    ?>
+
+};
+
+document.getElementById("New").onclick = function () {
+
+    location.href = "GetBoundingBox.php"
 };
 </script> 
 
