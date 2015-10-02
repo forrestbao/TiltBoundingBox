@@ -90,14 +90,19 @@ $connection = $_GET["Connection"];
 <script type="text/javascript">
 document.getElementById("confirm").onclick = function () {
     var obname = document.getElementById("ObName").value
-    // var zoomvalue = $(".zoom").html();
-    // if(zoomvalue == ""){
-    //     zoomvalue = 0;
-    // }
-    // ImageWidth = 400*(1+(parseInt(zoomvalue)/10));
-    // ImageHeight = ImageWidth;
-    // realStartX = Xcenter - ImageWidth/2;
-    // realStartY = Ycenter - ImageHeight/2;
+    var zoomvalue = $(".zoom").html();
+    if(zoomvalue == ""){
+        zoomvalue = 0;
+    }
+    zoomvalue = parseInt(zoomvalue);
+
+    if(r == undefined){
+        r = 0;
+    }
+    //var ImageWidth = 400*(1+(parseInt(zoomvalue)/10));
+    //var ImageHeight = ImageWidth;
+    //var realStartX = Xcenter - ImageWidth/2;
+    //var realStartY = Ycenter - ImageHeight/2;
     // var a_1 = Math.atan2((Ycenter - realStartY),(Xcenter - realStartX));
 
     // var r_a = (r/180)*Math.PI;
@@ -114,13 +119,16 @@ document.getElementById("confirm").onclick = function () {
     //console.log(a_1);
     //console.log(r_a);
     //console.log(a_1);
-    //console.log(r);
+    console.log(r);
     // console.log(xTrue);
     // console.log(yTrue);
     // console.log(l_1);
 
     //console.log(Xcenter);
-    // console.log(Ycenter);
+    //console.log(Ycenter);
+    //console.log(realWidth);
+    //console.log(realHeight);
+    console.log(zoomvalue);
     //console.log(zoomLevel);
     //console.log(zoomvalue);
     //console.log(ImageWidth);
@@ -134,6 +142,7 @@ document.getElementById("confirm").onclick = function () {
     <?php
     echo "location.href = 'insert.php?ObjectName=' + obname + '&X=' + startX + '&Y=' + startY + '&width=' + width + '&height=' + height + '&r=' + r + '&name=" . $temp . "';"
     ?>
+
 };
 
 document.getElementById("New").onclick = function () {
