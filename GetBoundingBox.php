@@ -37,8 +37,8 @@ $information = $_GET["infor"];
 $connection = $_GET["Connection"];
 ?>
 
- <input type="button" value ="-" onclick="zoomimage(0.9)"/>
-<input type="button" value ="+" onclick="zoomimage(1.1)"/>
+<!--  <input type="button" value ="-" onclick="zoomimage(0.9)"/>
+<input type="button" value ="+" onclick="zoomimage(1.1)"/> -->
 
 <div class="drawingArea" id="loading">
     <?php
@@ -46,10 +46,18 @@ $connection = $_GET["Connection"];
     ?> 
    <!--  <img id="zoomedimage" src="http://cf-wp-prod.sharethis.com/wp-content/uploads/2014/07/Its-Becoming-A-Mobile-World.jpg" alt="mobile"  >  -->
 </div>
-<canvas id="canvas" width="1000px" height="980px"></canvas>
 
+<?php
+list($width, $height) = getimagesize('images/'.$temp);
+//echo "width: " . $width . "<br />";
+//echo "height: " .  $height;
+$width = 2*$width;
+$height = 2*$height;
+echo "<canvas id='canvas' width=".$width." height=".$height."></canvas>"
+?>
 
 <div class="coords">
+
     <h4>Step 1: Press the "-" or "+" button at the upper left corner to </h4>
     <h4>zoom in or out the image to make sure that the object has a suitable size.</h4>
     <h4>Step 2: Use mouse to rotate the image make sure that the object is straight up</h4>
@@ -72,7 +80,7 @@ $connection = $_GET["Connection"];
     <p>W: <span class="width"></span>
     </p>
     <p>H: <span class="height"></span>
-    <p>Zoom: <span class="zoom"></span>
+   <!--  <p>Zoom: <span class="zoom"></span> -->
      </p>
 
 
@@ -87,22 +95,39 @@ $connection = $_GET["Connection"];
 <button id="New" class="float-left submit-button" >New Image</button>
 
 </div>
+<?php
+    echo "
+    <style>
+    .coords {
+        margin-left:" .$width."; 
+        margin-top: 0px;
+        position:absolute;
+        top: 100px;
+    }
+    </style>
+    "
+?>
+
 <script type="text/javascript">
 document.getElementById("confirm").onclick = function () {
     var obname = document.getElementById("ObName").value
-    var zoomvalue = $(".zoom").html();
-    if(zoomvalue == ""){
-        zoomvalue = 0;
-    }
-    zoomvalue = parseInt(zoomvalue);
+    //var zoomvalue = $(".zoom").html();
+    //if(zoomvalue == ""){
+    //    zoomvalue = 0;
+    //}
+    //zoomvalue = parseInt(zoomvalue);
 
     if(r == undefined){
         r = 0;
     }
+
+    var realImage = document.getElementById("zoomedimage");
+    var realImageWidth = realImage.clientWidth;
+    var realImageHeight = realImage.clientHeight;
     //var ImageWidth = 400*(1+(parseInt(zoomvalue)/10));
     //var ImageHeight = ImageWidth;
-    //var realStartX = Xcenter - ImageWidth/2;
-    //var realStartY = Ycenter - ImageHeight/2;
+    var realStartX = Xcenter - realImageWidth/2;
+    var realStartY = Ycenter - realImageHeight/2;
     // var a_1 = Math.atan2((Ycenter - realStartY),(Xcenter - realStartX));
 
     // var r_a = (r/180)*Math.PI;
@@ -119,29 +144,28 @@ document.getElementById("confirm").onclick = function () {
     //console.log(a_1);
     //console.log(r_a);
     //console.log(a_1);
-    console.log(r);
+    //console.log(realImageWidth);
+    //console.log(realImageHeight);
     // console.log(xTrue);
     // console.log(yTrue);
     // console.log(l_1);
 
-    //console.log(Xcenter);
-    //console.log(Ycenter);
+    console.log(Xcenter);
+    console.log(Ycenter);
     //console.log(realWidth);
     //console.log(realHeight);
-    console.log(zoomvalue);
+    //console.log(zoomvalue);
     //console.log(zoomLevel);
     //console.log(zoomvalue);
     //console.log(ImageWidth);
     //console.log(ImageHeight);
     //console.log(startX);
     //console.log(startY);
-    //console.log(realStartX);
-    //console.log(realStartY);
+    console.log(realStartX);
+    console.log(realStartY);
     // console.log(width);
     // console.log(height);
-    <?php
-    echo "location.href = 'insert.php?ObjectName=' + obname + '&X=' + startX + '&Y=' + startY + '&width=' + width + '&height=' + height + '&r=' + r + '&name=" . $temp . "';"
-    ?>
+
 
 };
 

@@ -2,7 +2,7 @@ var zoomLevel = 100;
 var maxZoomLevel = 105;
 var minZoomLevel = 100;
 var mouseIsDown = 0;
-var canvas, context, startX, endX, startY, endY, r, width, height, Xcenter, Ycenter, ImageWidth, ImageHeight,realStartX, realStartY, zoomvalue, xx, yy, a_1, r_a;
+var canvas, context, startX, endX, startY, endY, r, width, height, Xcenter, Ycenter, realHeight,realWidth;
 
 function zoomimage(zm) {
     
@@ -32,10 +32,15 @@ $(document).ready(function () {
    
     (function() {  /*the function is to rotate the object*/
         var rote=$("#zoomedimage");
+        //var rote = document.getElementById('zoomedimage'); 
+        //realHeight = rote.height();
+        //realWidth = rote.width();
         Xcenter = rote.offset().left + rote.width() / 2;
+        //Xcenter = 158 + rote.width() / 2;
         rote.center_x = Xcenter;
                      /*this returns the center of object or image  taken in the x-direction,offset.left gives position from left and later gives midvalue of object*/
-        Ycenter = rote.offset().top + rote.height() / 2             
+        Ycenter = rote.offset().top + rote.height() / 2;  
+        //Ycenter = 158 + rote.height() / 2;           
         rote.center_y = Ycenter;
               /*this returns the center of object or image  taken in the y-direction,offset.top gives position from top and later gives midvalue of object*/  
         
