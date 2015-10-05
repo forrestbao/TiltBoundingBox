@@ -53,6 +53,13 @@ list($width, $height) = getimagesize('images/'.$temp);
 //echo "height: " .  $height;
 $width = 2*$width;
 $height = 2*$height;
+if($width < 1000){
+    $width = 1000;
+}
+if($height < 1000){
+    $height = 1000;
+}
+
 echo "<canvas id='canvas' width=".$width." height=".$height."></canvas>"
 ?>
 
