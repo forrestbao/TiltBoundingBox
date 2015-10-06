@@ -33,6 +33,9 @@ if($temp_image_name != null){
     $temp = $temp_image_name;
 }
 $temp = basename($temp,"\n"); 
+if($temp == null){
+    $temp = "n02992529_391.JPEG";
+}
 $information = $_GET["infor"];
 $connection = $_GET["Connection"];
 ?>
@@ -73,7 +76,7 @@ echo "<canvas id='canvas' width=".$width." height=".$height."></canvas>"
     echo "
     <h3>" . $information. "</h3>
     <h3>" . $connection . "</h3>"
-
+    
     ?> 
     <p>Angle : <span id="angle"></span>
     </p>
@@ -170,6 +173,9 @@ document.getElementById("confirm").onclick = function () {
     console.log(realStartY);
     // console.log(width);
     // console.log(height);
+    <?php
+    echo "location.href = 'insert.php?ObjectName=' + obname + '&X=' + startX + '&Y=' + startY + '&width=' + width + '&height=' + height + '&r=' + r + '&name=" . $temp . "';"
+    ?>
 
 
 };
