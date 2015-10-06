@@ -53,24 +53,22 @@ list($width, $height) = getimagesize('images/'.$temp);
 //echo "height: " .  $height;
 $width = 2*$width;
 $height = 2*$height;
-if($width < 1000){
-    $width = 1000;
+if($width < $height){
+    $width = $height;
 }
-if($height < 1000){
-    $height = 1000;
+if($height < $width){
+    $height = $width;
 }
 
 echo "<canvas id='canvas' width=".$width." height=".$height."></canvas>"
 ?>
 
 <div class="coords">
-
-    <h4>Step 1: Press the "-" or "+" button at the upper left corner to </h4>
-    <h4>zoom in or out the image to make sure that the object has a suitable size.</h4>
-    <h4>Step 2: Use mouse to rotate the image make sure that the object is straight up</h4>
-    <h4>Step 3: Press the "Fetch Object" button, and draw bounding box of</h4>
-    <h4> the object from upper left to the right botton</h4>
-    <h4>Step 4: Enter the name of the object and press the confirm button to send the data to the database</h4>
+    <h4>Instruction:</h4>
+    <h5>Step 1: Use mouse to rotate the image and make sure that the object is straight up</h4>
+    <h5>Step 2: Press the "Fetch Object" button, and draw bounding box of the object </h4>
+    <h5>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp from upper left to the right bottom</h4>
+    <h5>Step 3: Enter the name of the object and press the confirm button to send the data to the database</h4>
     <?php
     echo "
     <h3>" . $information. "</h3>
