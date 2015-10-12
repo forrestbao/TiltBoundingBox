@@ -95,6 +95,10 @@ if($height < $width){
 echo "<canvas id='canvas' width=".$width." height=".$height."></canvas>"
 ?>
 
+<script>
+$(document).ready(function () {
+}
+</script>
 <!--display instructions and parameters -->
 <div class="coords">
     <h4>Instruction:</h4>
@@ -187,18 +191,18 @@ document.getElementById("confirm").onclick = function () {
     $('.ystart').html(yy); 
     $('.xstart').html(xx); 
 
-    console.log(realImageWidth);
-    console.log(realImageHeight);
-    console.log(xx);
-    console.log(yy);
-    console.log(a_1);
-    console.log(r_a);
-    console.log(a_2);
-    console.log(a_3);
     //console.log(realImageWidth);
     //console.log(realImageHeight);
-    console.log(xTrue);
-    console.log(yTrue);
+    //console.log(xx);
+    //console.log(yy);
+    //console.log(a_1);
+    //console.log(r_a);
+    //console.log(a_2);
+    //console.log(a_3);
+    //console.log(realImageWidth);
+    //console.log(realImageHeight);
+    //console.log(xTrue);
+    //console.log(yTrue);
     // console.log(l_1);
 
     console.log(Xcenter);
@@ -210,10 +214,10 @@ document.getElementById("confirm").onclick = function () {
     //console.log(zoomvalue);
     //console.log(ImageWidth);
     //console.log(ImageHeight);
-    console.log(startX);
-    console.log(startY);
-    console.log(realStartX);
-    console.log(realStartY);
+    //console.log(startX);
+    //console.log(startY);
+    //console.log(realStartX);
+    //console.log(realStartY);
     // console.log(width);
     // console.log(height);
     <?php
