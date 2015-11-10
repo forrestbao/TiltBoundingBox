@@ -28,7 +28,7 @@
 //fclose($file_handle);
 
 //load name of image from the $dir file into array $file_name.
-$dir = "images";
+$dir = "n02680754_wrench";
 $file_name = array();
 if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
@@ -42,22 +42,27 @@ if (is_dir($dir)) {
         closedir($dh);
     }
 }
-
+$index = 14;
+$temp_index = intval($_GET["index"]);
+if($temp_index != null){
+    $index = $temp_index;
+}
 //randomly pick an image
-$temp = $file_name[array_rand($file_name)];
-
+//$temp = $file_name[array_rand($file_name)];
+$temp = $file_name[$index];
 //echo $temp;
 //keep the same image after modification
 $temp_image_name = $_GET["name"];
 if($temp_image_name != null){
     $temp = $temp_image_name;
 }
+//$temp = "n03154073_3141.JPEG";
 //remove "\n" if it exists
 $temp = basename($temp,"\n");
-
+//$temp = "n03489162_7066.JPEG";
 //three conditions may cause problems. 
 if($temp == null || $temp == ".." || $temp == "."){
-    $temp = "image_error.png";
+    $temp = "n02680754_1.JPEG";
 }
 //track the information from the database connection
 $connection = $_GET["Connection"];
@@ -73,14 +78,14 @@ $information = $_GET["infor"];
 <!--load image-->
 <div class="drawingArea" id="loading">
     <?php
-    echo "<img id='zoomedimage' src='images/" . $temp . "' alt='mobile'>";
+    echo "<img id='zoomedimage' src='n02680754_wrench/" . $temp . "' alt='mobile'>";
     ?> 
    <!--  <img id="zoomedimage" src="http://cf-wp-prod.sharethis.com/wp-content/uploads/2014/07/Its-Becoming-A-Mobile-World.jpg" alt="mobile"  >  -->
 </div>
 
 <?php
 //track the size of the current image
-list($width, $height) = getimagesize('images/'.$temp);
+list($width, $height) = getimagesize('n02680754_wrench/'.$temp);
 //echo "width: " . $width . "<br />";
 //echo "height: " .  $height;
 $width = 2*$width;
@@ -90,6 +95,13 @@ if($width < $height){
 }
 if($height < $width){
     $height = $width;
+}
+
+if($width < 1000){
+    $width = 1000;
+}
+if($height < 1000){
+    $height = 1000;
 }
 //modify the size of Canvas
 echo "<canvas id='canvas' width=".$width." height=".$height."></canvas>"
@@ -104,7 +116,7 @@ $(document).ready(function () {
     <h4>Instruction:</h4>
     <h5>Step 1: Use mouse to rotate the image and make sure that the object is straight up</h4>
     <h5>Step 2: Click the "Fetch Object" button, and draw bounding box of the object </h4>
-    <h5>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp from upper left to the right bottom</h4>
+    <h5>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp from top left to the right bottom</h4>
     <h5>Step 3: Enter the name of the object and press the confirm button to send the data to the database</h4>
     <?php
     echo "
@@ -132,9 +144,11 @@ $(document).ready(function () {
     </p>-->
      
      <!--control buttons-->
-     <label>ObjectName <input type = "text" name = "ObjectName" id = "ObName" value = "" /></label> 
-     <br>
-
+    <label>ObjectName <input type = "text" name = "ObjectName" id = "ObName" value = "" /></label> 
+    <br>
+    <br>
+    <input type="checkbox" name="checkTrun" id = "chTrun" checked = "checked">Whether the object is truncated<br>
+    <br >
     <button id="anglebutton">Fetch Object</button>
     <button id="reset">Reset</button>
     <button id="confirm" class="float-left submit-button" >confirm</button>
@@ -159,6 +173,7 @@ $(document).ready(function () {
 <script type="text/javascript">
 document.getElementById("confirm").onclick = function () {
     var obname = document.getElementById("ObName").value
+    var trun = document.getElementById("chTrun").checked
     //var zoomvalue = $(".zoom").html();
     //if(zoomvalue == ""){
     //    zoomvalue = 0;
@@ -178,6 +193,9 @@ document.getElementById("confirm").onclick = function () {
     var realStartY = Ycenter - realImageHeight/2;
     var a_1 = Math.atan2((Ycenter - realStartY),(Xcenter - realStartX));
 
+    startX = startX + width/2;
+    startY = startY + height/2;
+
     var r_a = (r/180)*Math.PI;
     var a_2 = a_1 + r_a;
     var l_1 = Math.sqrt(Math.pow(Ycenter - realStartY,2) + Math.pow(Xcenter - realStartX,2));
@@ -191,10 +209,11 @@ document.getElementById("confirm").onclick = function () {
     $('.ystart').html(yy); 
     $('.xstart').html(xx); 
 
-    //console.log(realImageWidth);
-    //console.log(realImageHeight);
-    //console.log(xx);
-    //console.log(yy);
+    console.log(realImageWidth);
+    console.log(realImageHeight);
+    
+    console.log(xx);
+    console.log(yy);
     //console.log(a_1);
     //console.log(r_a);
     //console.log(a_2);
@@ -218,19 +237,23 @@ document.getElementById("confirm").onclick = function () {
     //console.log(startY);
     //console.log(realStartX);
     //console.log(realStartY);
-    // console.log(width);
-    // console.log(height);
+    console.log(width);
+    console.log(height);
+
     <?php
-    echo "location.href = 'insert.php?ObjectName=' + obname + '&X=' + xx + '&Y=' + yy + '&width=' + width + '&height=' + height + '&r=' + r + '&name=" . $temp . "';"
+        echo "location.href = 'insert.php?index=" . $index . "&ObjectName=' + obname + '&truncated=' + trun + '&X=' + xx + '&Y=' + yy + '&width=' + width + '&height=' + height + '&r=' + r + '&name=" . $temp . "';"
     ?>
+
 
 };
 
 
 
 document.getElementById("New").onclick = function () {
-
-    location.href = "GetBoundingBox.php"
+    <?php
+        $index = $index + 1;
+        echo "location.href = 'GetBoundingBox.php?index=".$index."';"
+    ?>
 };
 </script> 
 

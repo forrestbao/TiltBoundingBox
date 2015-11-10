@@ -43,18 +43,20 @@ $(document).ready(function () {
         //Ycenter = 158 + rote.height() / 2;           
         rote.center_y = Ycenter;
               /*this returns the center of object or image  taken in the y-direction,offset.top gives position from top and later gives midvalue of object*/  
-        
+
         var offset, dragging=false;
+
         rote.mousedown(function(e) {
         e.preventDefault(); /*prevents default function of event from happening*/
         dragging = true;
         offset = Math.atan2(rote.center_y - e.pageY, e.pageX - rote.center_x);
         });/*binding an event handler and call function when that event occurs */
         
-
+        
         $(document).mouseup(function(e) { 
-           dragging = false
+           dragging = false;
         });
+
         $(document).mousemove(function(e) {
             if (dragging) { 
                 
@@ -71,7 +73,6 @@ $(document).ready(function () {
             }
               
         }) 
-        
         
         // ImageWidth = 400*(1+((100-100)/10));
         // ImageHeight = ImageWidth;
@@ -94,7 +95,7 @@ $(document).ready(function () {
           
 
     }());
-
+    
     $("#anglebutton").click(function () {    
         $('canvas').css('z-index','+1');
         $('#loading').css('opacity','0.8');     
@@ -108,6 +109,9 @@ $(document).ready(function () {
 
     });
     
+    console.log(Xcenter);
+    console.log(Ycenter);
+
     function init() {
         
         canvas = document.getElementById("canvas");
@@ -116,7 +120,7 @@ $(document).ready(function () {
         canvas.addEventListener("mousedown", mouseDown, false);
         canvas.addEventListener("mousemove", mouseXY, false);
         canvas.addEventListener("mouseup", mouseUp, false);
-    
+       
     }/*in init function we are adding event listeners mouseup,mousedown,mousemove and calling respective functions*/
   
     function mouseUp(eve) {  /*to find coordinates when we mouse up*/
@@ -142,7 +146,9 @@ $(document).ready(function () {
         startX = endX = pos.x;
         startY = endY = pos.y;
         if(endX>startX && endY>startY){
+            //drawLine();
             drawSquare(); 
+
         }else{
             return null;
         }
@@ -166,7 +172,6 @@ $(document).ready(function () {
     }
 
 
-    
     function drawSquare() {   /*draw square using coordinates when we mouseup and mousedown */
         // creating a square
         var w = endX - startX;
@@ -182,10 +187,28 @@ $(document).ready(function () {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         context.beginPath();
+        context.setLineDash([1,2]);
+        context.moveTo(startX,startY);
+        context.lineTo(startX,startY+300);
+        context.lineWidth = 1;
+        context.strokeStyle = 'blue';
+        context.stroke();
+        
+        context.beginPath();
+        context.setLineDash([1,2]);
+        context.moveTo(startX,startY);
+        context.lineTo(startX+300,startY);
+        context.lineWidth = 1;
+        context.strokeStyle = 'blue';
+        context.stroke();
+
+        context.beginPath();
+        context.setLineDash([0]);
         context.rect(startX + offsetX, startY + offsetY, width, height);
         context.lineWidth = 1;
         context.strokeStyle = 'black';
         context.stroke();
+
         $(".width").html(width);
         $(".height").html(height);
 
